@@ -7,6 +7,145 @@ Below you will find a set of tasks for you to complete to set up a databases of 
 To submit this homework write the correct commands for each question here:
 
 ```sql
+--2
+create table mentors (
+	id serial primary key,
+	name varchar(30) not null,
+	years_Glasgow varchar(12) not null,
+	address varchar(120),
+	programming_language varchar(30)
+);
+
+--3
+INSERT INTO mentors (name, years_Glasgow, address, programming_language) 
+VALUES ('John Smith', 10,'11 New Road','Javascript');
+
+INSERT INTO mentors (name, years_Glasgow, address, programming_language) 
+VALUES ('Joao da Silva', 3,'231 Old Road','React');
+
+INSERT INTO mentors (name, years_Glasgow, address, programming_language) 
+VALUES ('Ana O.', 8,'90 That street','Javascript');
+
+INSERT INTO mentors (name, years_Glasgow, address, programming_language) 
+VALUES ('Paul F.', 1,'195 This street','SQL');
+
+INSERT INTO mentors (name, years_Glasgow, address, programming_language) 
+VALUES ('Rose R.', 15,'171 New Road','NodeJs');
+
+--4
+create table students (
+	id serial primary key,
+	name varchar(30) not null,
+	address varchar(120),
+	graduated boolean
+);
+
+--5
+INSERT INTO students (name, address, graduated) 
+VALUES ('Rose E.', '171 Any Road', True);
+
+INSERT INTO students (name, address, graduated) 
+VALUES ('Elliot Alderson', '13 Street street', True);
+
+INSERT INTO students (name, address, graduated) 
+VALUES ('Darlene Alderson', '907 Other street', True);
+
+INSERT INTO students (name, address, graduated) 
+VALUES ('Sponge bob', 'Pineapple', False);
+
+INSERT INTO students (name, address, graduated) 
+VALUES ('Patrick Star', 'Under a rock', True);
+
+INSERT INTO students (name, address, graduated) 
+VALUES ('Ricky Sanchez', 'earth c-137', True);
+
+INSERT INTO students (name, address, graduated) 
+VALUES ('Morty Sanchez', '12 his street', False);
+
+INSERT INTO students (name, address, graduated) 
+VALUES ('Beetejuice', 'Cemetery', False);
+
+INSERT INTO students (name, address, graduated) 
+VALUES ('Jack S.', '70 Any Street', True);
+
+INSERT INTO students (name, address, graduated) 
+VALUES ('John K.', '2 main road', False);
+
+
+--6
+select * from mentors
+select * from students
+
+
+--7
+create table classes(
+	id serial primary key,
+	leading_mentor int references mentors,
+	topic varchar(30) not null,
+	class_date date,
+	location varchar(30)
+);
+
+--8
+INSERT INTO classes (leading_mentor, topic, class_date, location) 
+VALUES (3, 'Javascript', '2021-10-29', 'Barcelona');
+
+INSERT INTO classes (leading_mentor, topic, class_date, location) 
+VALUES (4, 'React', '2021-10-20', 'London');
+
+INSERT INTO classes (leading_mentor, topic, class_date, location) 
+VALUES (1, 'NodeJs', '2021-11-05', 'Madrid');
+
+
+--9
+create table students_attendance (
+	class_id int references classes,
+	student_id int references students,
+);
+
+INSERT INTO students_attendance (class_id, student_id) 
+VALUES (1, 10);
+
+INSERT INTO students_attendance (class_id, student_id) 
+VALUES (1, 1);
+
+INSERT INTO students_attendance (class_id, student_id) 
+VALUES (1, 3);
+
+INSERT INTO students_attendance (class_id, student_id) 
+VALUES (1, 4);
+
+INSERT INTO students_attendance (class_id, student_id) 
+VALUES (1, 5);
+
+INSERT INTO students_attendance (class_id, student_id) 
+VALUES (2, 2);
+
+INSERT INTO students_attendance (class_id, student_id) 
+VALUES (2, 6);
+
+INSERT INTO students_attendance (class_id, student_id) 
+VALUES (3, 7);
+
+INSERT INTO students_attendance (class_id, student_id) 
+VALUES (3, 8);
+
+INSERT INTO students_attendance (class_id, student_id) 
+VALUES (3, 9);
+
+
+
+--10
+select * from mentors where years_Glasgow > 5;
+
+select * from mentors where programming_language='Javascript';
+
+select * from students where graduated=True;
+
+select * from classes where class_date < '2021-06-01';
+
+select student_id from students_attendance where class_id=1;
+
 
 
 ```
