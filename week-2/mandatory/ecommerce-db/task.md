@@ -10,6 +10,54 @@ To submit this homework write the correct commands for each question here:
 
 ```sql
 
+select * from products order by unit_price DESC limit 5;
+
+-- 6. Retrieve all the products with their corresponding suppliers. The result should only contain the columns `product_name`, `unit_price` and `supplier_name`
+SELECT p.product_name as product, p.unit_price as price, s.supplier_name as supplier
+FROM products as p
+INNER JOIN suppliers as s ON s.id=p.supplier_id
+
+-- 7. Retrieve all the products sold by suppliers based in the United Kingdom. The result should only contain the columns `product_name` and `supplier_name`.
+SELECT p.product_name as product, s.supplier_name as supplier
+FROM products as p
+INNER JOIN suppliers as s ON s.id=p.supplier_id
+where s.country='United Kingdom'
+
+-- 8. Retrieve all orders from customer ID `1`
+SELECT o.* FROM orders as o
+INNER JOIN customers as c ON c.id=o.customer_id
+where c.id=1
+
+-- 9. Retrieve all orders from customer named `Hope Crosby`
+SELECT o.* FROM orders as o
+INNER JOIN customers as c ON c.id=o.customer_id
+where c.name='Hope Crosby'
+
+-- 10. Retrieve all the products in the order `ORD006`. The result should only contain the columns `product_name`, `unit_price` and `quantity`.
+SELECT p.product_name, p.unit_price, i.quantity 
+FROM orders as o
+INNER JOIN order_items as i ON i.order_id=o.id
+inner join products as p on p.id=i.product_id
+where o.order_reference='ORD006'
+
+-- 11. Retrieve all the products with their supplier for all orders of all customers. The result should only contain the columns `name` (from customer), `order_reference` `order_date`, `product_name`, `supplier_name` and `quantity`.
+SELECT c.name, o.order_reference, o.order_date, p.product_name, s.supplier_name, i.quantity 
+FROM orders as o
+INNER JOIN order_items as i ON i.order_id=o.id
+inner join products as p on p.id=i.product_id
+inner join suppliers as s on p.supplier_id=s.id
+inner join customers as c on c.id=o.customer_id
+
+
+-- 12. Retrieve the names of all customers who bought a product from a supplier from China.
+SELECT c.name 
+FROM orders as o
+INNER JOIN order_items as i ON i.order_id=o.id
+inner join products as p on p.id=i.product_id
+inner join suppliers as s on p.supplier_id=s.id
+inner join customers as c on c.id=o.customer_id
+where s.country='China'
+
 
 ```
 
